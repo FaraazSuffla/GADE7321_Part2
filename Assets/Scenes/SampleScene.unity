@@ -243,7 +243,8 @@ Transform:
   m_LocalPosition: {x: 4.5, y: 1, z: 4.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
@@ -425,13 +426,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 86654029}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!1 &2013301541
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,9 +462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f16c07b96a138d42897c3f76e4b4326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeWidth: 10
-  mazeHeight: 10
-  cubePrefab: {fileID: 3358972483137542938, guid: 3da83bcb2a08a2243883940706409847, type: 3}
+  mazeWidth: 20
+  mazeHeight: 20
+  wallHeight: 2
+  wallPrefab: {fileID: 3358972483137542938, guid: 3da83bcb2a08a2243883940706409847, type: 3}
+  floorPrefab: {fileID: 3358972483137542938, guid: 3da83bcb2a08a2243883940706409847, type: 3}
   startOffset: {x: 0.5, y: 0, z: 0.5}
 --- !u!4 &2013301543
 Transform:
@@ -515,7 +518,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 2070641577}
   - {fileID: 2013301543}
