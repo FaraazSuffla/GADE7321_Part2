@@ -1,29 +1,39 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
+    public Color playerColor = Color.red; // Color for Player 2
     public float moveSpeed = 5f;
     public bool isMoving = false;
     public Vector3 targetPosition;
+    private Renderer playerRenderer; // Renderer component of the player GameObject
+
+    void Start()
+    {
+        // Get the Renderer component attached to the player GameObject
+        playerRenderer = GetComponent<Renderer>();
+        // Set the initial color of the player GameObject
+        playerRenderer.material.color = playerColor;
+    }
 
     void Update()
     {
         if (!isMoving)
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Move(Vector3.forward);
             }
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 Move(Vector3.back);
             }
-            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Move(Vector3.left);
             }
-            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Move(Vector3.right);
             }
