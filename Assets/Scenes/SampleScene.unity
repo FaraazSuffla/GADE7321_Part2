@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 86654024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 1, z: 4.5}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -396,7 +396,7 @@ Transform:
   m_GameObject: {fileID: 676318310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 1, z: 4.5}
+  m_LocalPosition: {x: 18, y: 1, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -722,7 +722,7 @@ MonoBehaviour:
   wallHeight: 2
   wallPrefab: {fileID: 2330804699131927637, guid: 3025e1ce2106aaf49b9219cf5acd3a05, type: 3}
   floorPrefab: {fileID: 3358972483137542938, guid: 3da83bcb2a08a2243883940706409847, type: 3}
-  startOffset: {x: 0.5, y: 0, z: 0.5}
+  startOffset: {x: 0, y: 0, z: 0}
   wallProbability: 0.3
   wallColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   floorColor: {r: 1, g: 1, b: 1, a: 1}
