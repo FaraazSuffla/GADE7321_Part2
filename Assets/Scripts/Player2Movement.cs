@@ -19,7 +19,8 @@ public class Player2Movement : MonoBehaviour
 
     void Update()
     {
-        if (!isMoving)
+        // Allow movement only when it's Player 2's turn
+        if (GameManager.instance && GameManager.instance.player2Movement == this && !isMoving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -60,6 +61,7 @@ public class Player2Movement : MonoBehaviour
         }
 
         isMoving = false;
+        GameManager.instance.SwitchTurn(); // Notify the GameManager to switch turns
     }
 
     private bool IsTargetPositionValid(Vector3 position)
