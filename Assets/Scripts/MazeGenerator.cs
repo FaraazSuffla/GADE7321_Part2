@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public class MazeGenerator : MonoBehaviour
 {
-    public int mazeWidth = 10; // Number of cubes in the X direction
-    public int mazeHeight = 10; // Number of cubes in the Z direction
-    public float wallHeight = 2f; // Height of the walls
+    [Header("Maze Settings")]
+    public int mazeWidth = 10; // Number of cells in the X direction
+    public int mazeHeight = 10; // Number of cells in the Z direction
     public GameObject wallPrefab; // Reference to the wall prefab
     public GameObject floorPrefab; // Reference to the floor prefab
-    public Vector3 startOffset = new Vector3(0.5f, 0.5f, 0.5f); // Offset to align the maze properly
-    public float wallProbability = 0.3f; // Probability of a cube being a wall
 
+    [Header("Maze Generation Settings")]
+    [Range(0f, 1f)]
+    public float wallProbability = 0.3f; // Probability of a cell being a wall
     public Color wallColor = Color.gray; // Color of the walls
     public Color floorColor = Color.white; // Color of the floors
 
-    // Array list to represent the maze structure
-    private List<List<int>> mazeArray = new List<List<int>>();
+    private List<List<GameObject>> mazeCells = new List<List<GameObject>>(); // 2D array to store maze GameObjects
 
     void Start()
     {
@@ -24,78 +24,70 @@ public class MazeGenerator : MonoBehaviour
 
     void GenerateMaze()
     {
-        // Loop through each position in the grid
         for (int x = 0; x < mazeWidth; x++)
         {
-            List<int> row = new List<int>(); // Create a new row for the mazeArray
-
+            List<GameObject> row = new List<GameObject>();
             for (int z = 0; z < mazeHeight; z++)
             {
-                // Calculate the position for the current cube
-                Vector3 position = new Vector3(x, 0, z);
-
-                // If it's an edge cell, instantiate a wall and represent it as 1
-                if (x == 0 || z == 0 || x == mazeWidth - 1 || z == mazeHeight - 1)
-                {
-                    InstantiateWall(position);
-                    row.Add(1); // Add 1 to represent a wall
-                }
-                else if ((x == 1 && z == 1) || (x == 18 && z == 1)) // Check if it's one of the specific positions
-                {
-                    // Add a floor at these positions
-                    GameObject floor = Instantiate(floorPrefab, position + startOffset, Quaternion.identity);
-                    floor.transform.parent = transform; // Set parent to the grid GameObject
-                    AssignColor(floor, floorColor);
-                    row.Add(0); // Add 0 to represent a floor
-                }
-                else
-                {
-                    // Decide whether to instantiate a wall or a floor
-                    GameObject cubePrefab = (Random.value < wallProbability) ? wallPrefab : floorPrefab;
-
-                    // Instantiate the cube (wall or floor) at the calculated position
-                    GameObject cube = Instantiate(cubePrefab, position + startOffset, Quaternion.identity);
-                    cube.transform.parent = transform; // Set parent to the grid GameObject
-
-                    // If it's a wall, adjust the scale to match wall height and assign wall color
-                    if (cubePrefab == wallPrefab)
-                    {
-                        cube.transform.localScale = new Vector3(1f, wallHeight, 1f);
-                        cube.transform.position += new Vector3(0f, wallHeight / 2f, 0f); // Adjust position to raise the wall
-                        AssignColor(cube, wallColor);
-                        row.Add(1); // Add 1 to represent a wall
-                    }
-                    // If it's a floor, assign floor color and represent it as 0
-                    else
-                    {
-                        AssignColor(cube, floorColor);
-                        row.Add(0); // Add 0 to represent a floor
-                    }
-                }
+                GameObject cell = Instantiate(wallPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                row.Add(cell);
             }
+            mazeCells.Add(row);
+        }
 
-            mazeArray.Add(row); // Add the row to the mazeArray
+        // Create floors
+        for (int x = 0; x < mazeWidth; x++)
+        {
+            for (int z = 0; z < mazeHeight; z++)
+            {
+                GameObject floor = Instantiate(floorPrefab, new Vector3(x, -0.5f, z), Quaternion.identity);
+                floor.GetComponent<Renderer>().material.color = floorColor;
+            }
+        }
+
+        // Generate maze paths
+        DFS(1, 1);
+
+        // Open entrance and exit
+        Destroy(mazeCells[0][1]); // Remove wall for entrance
+        Destroy(mazeCells[mazeWidth - 1][mazeHeight - 2]); // Remove wall for exit
+    }
+
+    void DFS(int x, int z)
+    {
+        mazeCells[x][z].SetActive(false); // Mark cell as part of the path
+
+        List<Vector2Int> directions = new List<Vector2Int>
+        {
+            new Vector2Int(0, 1), // Up
+            new Vector2Int(0, -1), // Down
+            new Vector2Int(1, 0), // Right
+            new Vector2Int(-1, 0) // Left
+        };
+
+        Shuffle(directions);
+
+        foreach (Vector2Int dir in directions)
+        {
+            int nextX = x + dir.x * 2;
+            int nextZ = z + dir.y * 2;
+
+            if (nextX > 0 && nextX < mazeWidth && nextZ > 0 && nextZ < mazeHeight && mazeCells[nextX][nextZ].activeSelf)
+            {
+                mazeCells[nextX - dir.x][nextZ - dir.y].SetActive(false); // Remove wall between cells
+                DFS(nextX, nextZ);
+            }
         }
     }
 
-
-
-    // Helper method to instantiate a wall at the specified position
-    void InstantiateWall(Vector3 position)
+    void Shuffle<T>(List<T> list)
     {
-        GameObject wall = Instantiate(wallPrefab, position + startOffset, Quaternion.identity);
-        wall.transform.parent = transform; // Set parent to the grid GameObject
-        wall.transform.localScale = new Vector3(1f, wallHeight, 1f); // Adjust scale to match wall height
-        AssignColor(wall, wallColor);
-    }
-
-    // Helper method to assign color to the cube's renderer
-    void AssignColor(GameObject cube, Color color)
-    {
-        Renderer cubeRenderer = cube.GetComponent<Renderer>();
-        if (cubeRenderer != null)
+        for (int i = 0; i < list.Count; i++)
         {
-            cubeRenderer.material.color = color; // Assign color
+            int randomIndex = Random.Range(i, list.Count);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
 }
