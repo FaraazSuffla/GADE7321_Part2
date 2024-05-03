@@ -982,10 +982,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f16c07b96a138d42897c3f76e4b4326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeWidth: 50
-  mazeHeight: 50
+  mazeWidth: 20
+  mazeHeight: 20
+  wallHeight: 2
   wallPrefab: {fileID: 2330804699131927637, guid: 3025e1ce2106aaf49b9219cf5acd3a05, type: 3}
   floorPrefab: {fileID: 3358972483137542938, guid: 3da83bcb2a08a2243883940706409847, type: 3}
+  startOffset: {x: 0, y: 0, z: 0}
   wallProbability: 0.3
   wallColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   floorColor: {r: 1, g: 1, b: 1, a: 1}
