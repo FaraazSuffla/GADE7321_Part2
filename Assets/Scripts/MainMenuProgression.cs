@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuProgression : MonoBehaviour
 {
-    public GameObject MapSelectPanel;
+    public GameObject MainMenuPanel;
     public GameObject ModeSelectPanel;
     public GameObject DifficultySelectPanel;
 
-    public void MapSelect()
+    public void Play()
     {
-        MapSelectPanel.SetActive(false);
+        MainMenuPanel.SetActive(false);
         ModeSelectPanel.SetActive(true);
     }
 
@@ -21,9 +21,39 @@ public class MainMenuProgression : MonoBehaviour
         DifficultySelectPanel.SetActive(true);
     }
 
-    public void DifficultySelect()
+    public void ReturnToPlay()
+    {
+        ModeSelectPanel.SetActive(false);
+        MainMenuPanel.SetActive(true);
+    }
+
+    public void ReturnToModeSelect()
+    {
+        DifficultySelectPanel.SetActive(false);
+        ModeSelectPanel.SetActive(true);
+    }
+
+    public void NormalDifficulty()
     {
         SceneManager.LoadScene("DefaultMap (Normal AI)");
+        
+    }
+    public void ChallengeDifficulty()
+    {
+        
         SceneManager.LoadScene("DefaultMap (Difficult AI)");
     }
+
+    public void VSHuman()
+    {
+        SceneManager.LoadScene("DefaultMap");
+        
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    
 }
