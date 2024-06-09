@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/DefaultMap (Difficult AI).unity
+    guid: 6ae379c19930b744689f245860288f65
+  - enabled: 1
+    path: Assets/Scenes/DefaultMap (Normal AI).unity
+    guid: f6b6e687f9800ef4f948180e4dc31693
   m_configObjects: {}
