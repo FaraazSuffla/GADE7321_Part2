@@ -2198,7 +2198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 86654024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51bdc93583e836343a674891eed6036e, type: 3}
+  m_Script: {fileID: 11500000, guid: 65714f21a19b8604485ee7a8f1fdf6d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerColor: {r: 0, g: 0, b: 1, a: 1}
@@ -13295,11 +13295,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 621578636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d065e3d56965a43be64e8d3e234a47, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa3bbed1c9721c4c94a9ed72e207a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player1Movement: {fileID: 86654030}
-  player2Movement: {fileID: 676318316}
+  aiMovement: {fileID: 676318316}
   turnIndicatorText: {fileID: 870606757}
 --- !u!1001 &625541933
 PrefabInstance:
@@ -14481,10 +14481,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 676318310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 781f69a5ac1eedd439bf27e187c0a02b, type: 3}
+  m_Script: {fileID: 11500000, guid: 21bf8f1c2df999b49ac94c5a6a75a31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColor: {r: 1, g: 0, b: 0, a: 1}
+  playerColor: {r: 0, g: 1, b: 0, a: 1}
   moveSpeed: 5
   isMoving: 0
   targetPosition: {x: 0, y: 0, z: 0}
